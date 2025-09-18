@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { config } from 'process';
 import { UserModule } from './modules/users/user.module';
+import { ClassesModule } from './modules/classes/classes.module';
 
 
 
@@ -28,7 +29,7 @@ import { UserModule } from './modules/users/user.module';
         ssl: { rejectUnauthorized: false },
       }),     
     }),
-    UserModule,
+    UserModule, ClassesModule
   ],
   controllers: [AppController],
   providers: [AppService],
