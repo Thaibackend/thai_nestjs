@@ -25,7 +25,7 @@ import { ClassesModule } from './modules/classes/classes.module';
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
         autoLoadEntities: true,
-        synchronize: configService.get<string>('NODE_ENV') !== 'production',
+        synchronize: false,
         ssl: { rejectUnauthorized: false },
       }),     
     }),

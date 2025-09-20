@@ -26,6 +26,6 @@ export class User {
   })
   role: RoleSystem;
 
-  @OneToOne(() => Classes, (cls)=>cls.teacherCreated )  
+  @OneToOne(() => Classes, (cls)=>cls.teacherCreated, { nullable: true })  
   classes: Classes;
 }

@@ -1,6 +1,6 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, NotFoundException, Delete, Patch } from '@nestjs/common';
 import { ClassesService } from './classes.service';
-import { CreateClassesDto } from './classes.dto';
+import { CreateClassesDto, UpdateClassesDto } from './classes.dto';
 
 @Controller('classes')
 export class ClassesController {
@@ -9,5 +9,26 @@ export class ClassesController {
     @Post('createClass')
     async createClass(@Body() createClassesDto: CreateClassesDto) {
         return this.classesService.createClasses(createClassesDto);
+    }
+    @Patch('update/:id')
+    async updateClass(
+        @Body() dto: UpdateClassesDto,
+        @Param('id') classId: number,
+    ){
+        return this.classesService.updateClasses(dto, classId);
+    }
+    @Get()
+    async getAllClasses(){
+        return await this.classesService.getAllClasses();
+    }
+
+    @Get(':id')
+    async getClassById(@Param('id') classId: number){
+        return await this.classesService.getClassById(classId);
+    }
+
+    @Delete(':id')
+    async deleteClass(@Param('id') classId: number){
+        return await this.classesService.deleteClass(classId);
     }
 }
