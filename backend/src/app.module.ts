@@ -3,19 +3,17 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { config } from 'process';
 import { UserModule } from './modules/users/user.module';
-
-
+import { ClassesModule } from './modules/classes/classes.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    TypeOrmModule.forRootAsync({   
+    TypeOrmModule.forRootAsync({
       inject: [ConfigService],
-      
+
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
         host: configService.get<string>('DB_HOST'),
@@ -26,9 +24,10 @@ import { UserModule } from './modules/users/user.module';
         autoLoadEntities: true,
         synchronize: configService.get<string>('NODE_ENV') !== 'production',
         ssl: { rejectUnauthorized: false },
-      }),     
+      }),
     }),
     UserModule,
+    ClassesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

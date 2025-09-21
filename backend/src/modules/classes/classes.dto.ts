@@ -1,15 +1,34 @@
-import { IsInt, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import {
+  IsInt,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Min,
+} from 'class-validator';
 
-export class CreateClassesDto{
-    @IsString()
-    @IsNotEmpty()
-    className: string;
+export class CreateClassesDto {
+  @IsString()
+  @IsNotEmpty()
+  className: string;
 
-    @IsNumber()
-    @IsNotEmpty()
-    numberStudents: number;
+  @IsNumber()
+  @IsNotEmpty()
+  @Min(0)
+  numberStudent: number;
 
-    @IsInt()
-    @IsNotEmpty()
-    teacherCreatedId: number;
+  @IsInt()
+  @IsNotEmpty()
+  teacherCreatedId: number;
+}
+
+export class UpdateClassesDto {
+  @IsString()
+  @IsOptional()
+  className?: string;
+
+  @IsNumber()
+  @IsOptional()
+  @Min(0)
+  numberStudent?: number;
 }
